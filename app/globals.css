@@ -6,34 +6,44 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 7rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-    --primary: 24.6 95% 53.1%;
-    --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 24.6 95% 53.1%;
-    --radius: 0.5rem;
+    --background: 42 27% 96%;
+    --foreground: 150 26% 12%;
+    --card: 42 33% 98%;
+    --card-foreground: 150 26% 12%;
+    --popover: 42 33% 98%;
+    --popover-foreground: 150 26% 12%;
+    --primary: 145 36% 24%;
+    --primary-foreground: 42 30% 96%;
+    --secondary: 44 20% 90%;
+    --secondary-foreground: 150 22% 16%;
+    --muted: 44 18% 92%;
+    --muted-foreground: 150 8% 38%;
+    --accent: 92 20% 87%;
+    --accent-foreground: 150 26% 14%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 42 30% 96%;
+    --border: 43 15% 82%;
+    --input: 43 15% 82%;
+    --ring: 145 36% 24%;
+    --radius: 1rem;
   }
 
   * {
@@ -41,6 +51,14 @@ html {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }

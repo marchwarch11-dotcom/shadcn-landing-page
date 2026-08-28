@@ -14,7 +14,12 @@ interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   name: "Garitas Property Care",
-  navigation: [],
+  navigation: [
+    { href: "/#memberships", label: "Memberships" },
+    { href: "/#services", label: "Services" },
+    { href: "/#about", label: "About" },
+    { href: "/#snow", label: "Snow" },
+  ],
   contact: {
     phoneE164: null,
     whatsappNumberE164: null,

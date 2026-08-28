@@ -8,7 +8,13 @@ export interface AboutPerson {
 }
 
 export interface AboutContent extends SectionCopy {
+  mediaKey?: string;
   people: AboutPerson[];
 }
 
-export const aboutContent: AboutContent | null = null;
+export const aboutContent: AboutContent = {
+  eyebrow: "About Us",
+  title: "Alex & Raimundo",
+  mediaKey: "about-pair",
+  people: [],
+};

@@ -9,4 +9,7 @@ export interface RealWorkContent extends SectionCopy {
   items: RealWorkItem[];
 }
 
-export const realWorkContent: RealWorkContent | null = null;
+export const realWorkContent: RealWorkContent = {
+  title: "Real Work / Proof",
+  items: [],
+};

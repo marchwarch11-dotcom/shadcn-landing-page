@@ -1,47 +1,65 @@
+import { SectionHeading } from "@/components/layout/section-heading";
 import { PrototypeMedia } from "@/components/media/prototype-media";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { media, prototypeVisuals } from "@/content/media";
+import { Reveal } from "@/components/motion/reveal";
+import { media } from "@/content/media";
 import { seasonalExperienceContent } from "@/content/seasonal-experience";
+import { cn } from "@/lib/utils";
 
-const prototypeSeasons = [
-  ["Spring", prototypeVisuals.seasons.spring],
-  ["Summer", prototypeVisuals.seasons.summer],
-  ["Fall", prototypeVisuals.seasons.fall],
-  ["Winter", prototypeVisuals.seasons.winter],
-] as const;
+const seasonSurface = {
+  spring: "bg-[#edf2e5]",
+  summer: "bg-[#e4eee5]",
+  fall: "bg-[#eee6d7]",
+  winter: "bg-[#e7eceb]",
+} as const;
 
 export const SeasonalExperienceSection = () => {
   if (!seasonalExperienceContent || seasonalExperienceContent.seasons.length === 0) {
-    return (
-      <section id="seasonal-experience" className="container py-20 sm:py-24 lg:py-32">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {prototypeSeasons.map(([label, key]) => (
-            <div key={key} className="space-y-3">
-              <PrototypeMedia asset={media[key]} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" aspectClassName="aspect-[4/3]" />
-              <p className="text-sm font-medium text-muted-foreground">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    );
+    return null;
   }
 
   return (
     <section id="seasonal-experience" className="container py-20 sm:py-24 lg:py-32">
-      <div className="mx-auto mb-10 max-w-3xl text-center">
-        {seasonalExperienceContent.eyebrow ? <p className="mb-2 text-lg tracking-wider text-primary">{seasonalExperienceContent.eyebrow}</p> : null}
-        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{seasonalExperienceContent.title}</h2>
-        {seasonalExperienceContent.description ? <p className="text-lg text-muted-foreground sm:text-xl">{seasonalExperienceContent.description}</p> : null}
-      </div>
+      <Reveal>
+        <SectionHeading
+          eyebrow={seasonalExperienceContent.eyebrow}
+          title={seasonalExperienceContent.title}
+          description={seasonalExperienceContent.description}
+          align="center"
+          className="mb-12"
+        />
+      </Reveal>
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {seasonalExperienceContent.seasons.map((season) => {
-          const seasonMedia = season.mediaKey ? media[season.mediaKey as keyof typeof media] : undefined;
+        {seasonalExperienceContent.seasons.map((season, index) => {
+          const seasonMedia = season.mediaKey
+            ? media[season.mediaKey as keyof typeof media]
+            : undefined;
+
           return (
-            <Card key={season.key} className="h-full overflow-hidden">
-              {seasonMedia ? <PrototypeMedia asset={seasonMedia} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" aspectClassName="aspect-[4/3]" className="rounded-none" /> : null}
-              <CardHeader><CardTitle>{season.title}</CardTitle></CardHeader>
-              {season.description ? <CardContent className="text-muted-foreground">{season.description}</CardContent> : null}
-            </Card>
+            <Reveal key={season.key} delay={index * 70}>
+              <article
+                className={cn(
+                  "group overflow-hidden rounded-[1.5rem] border p-3 transition-transform duration-300 hover:-translate-y-1",
+                  seasonSurface[season.key],
+                )}
+              >
+                {seasonMedia ? (
+                  <PrototypeMedia
+                    asset={seasonMedia}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    aspectClassName="aspect-[4/5] sm:aspect-[4/3] xl:aspect-[3/4]"
+                    className="rounded-[1.15rem]"
+                    imageClassName="transition-transform duration-700 group-hover:scale-[1.025]"
+                  />
+                ) : null}
+                <div className="flex items-center justify-between px-2 pb-2 pt-4">
+                  <h3 className="text-xl font-semibold tracking-tight">{season.title}</h3>
+                  <span className="text-xs font-medium tabular-nums text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </article>
+            </Reveal>
           );
         })}
       </div>

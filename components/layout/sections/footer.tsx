@@ -5,14 +5,14 @@ import { siteConfig } from "@/config/site";
 
 export const FooterSection = () => {
   return (
-    <footer className="container py-12 sm:py-16">
-      <div className="rounded-2xl border border-secondary bg-card p-8 sm:p-10">
-        <Link href="/" className="text-xl font-bold">
+    <footer className="container pb-10">
+      <Separator />
+      <div className="flex flex-col gap-5 py-8 sm:flex-row sm:items-end sm:justify-between">
+        <Link href="/#hero" className="text-xl font-semibold tracking-tight sm:text-2xl">
           {siteConfig.name}
         </Link>
-        <Separator className="my-6" />
         <p className="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} {siteConfig.name}.
+          &copy; {new Date().getFullYear()} {siteConfig.name}
         </p>
       </div>
     </footer>

@@ -1,40 +1,58 @@
+import { SectionHeading } from "@/components/layout/section-heading";
 import { PrototypeMedia } from "@/components/media/prototype-media";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Reveal } from "@/components/motion/reveal";
 import { media, prototypeVisuals } from "@/content/media";
 import { services, servicesSection } from "@/content/services";
 
 export const ServicesSection = () => {
   if (!servicesSection || services.length === 0) {
-    return (
-      <section id="services" className="container py-20 sm:py-24 lg:py-32">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {prototypeVisuals.services.map((key) => (
-            <PrototypeMedia key={key} asset={media[key]} sizes="(max-width: 640px) 100vw, 50vw" aspectClassName="aspect-[4/3]" />
-          ))}
-        </div>
-      </section>
-    );
+    return null;
   }
+
+  const serviceMedia = prototypeVisuals.services.map((key) => media[key]);
 
   return (
     <section id="services" className="container py-20 sm:py-24 lg:py-32">
-      <div className="mx-auto mb-10 max-w-3xl text-center">
-        {servicesSection.eyebrow ? <p className="mb-2 text-lg tracking-wider text-primary">{servicesSection.eyebrow}</p> : null}
-        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{servicesSection.title}</h2>
-        {servicesSection.description ? <p className="text-lg text-muted-foreground sm:text-xl">{servicesSection.description}</p> : null}
-      </div>
-      <div className="mx-auto grid w-full gap-4 sm:grid-cols-2 lg:w-[80%]">
-        {services.map(({ title, description, badge, mediaKey }) => {
-          const serviceMedia = mediaKey ? media[mediaKey as keyof typeof media] : undefined;
-          return (
-            <Card key={title} className="relative h-full overflow-hidden bg-muted/60">
-              {serviceMedia ? <PrototypeMedia asset={serviceMedia} sizes="(max-width: 640px) 100vw, 50vw" aspectClassName="aspect-[4/3]" className="rounded-none" /> : null}
-              <CardHeader><CardTitle>{title}</CardTitle>{description ? <CardDescription>{description}</CardDescription> : null}</CardHeader>
-              {badge ? <Badge variant="secondary" className="absolute right-3 top-3">{badge}</Badge> : null}
-            </Card>
-          );
-        })}
+      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div>
+          <Reveal>
+            <SectionHeading
+              eyebrow={servicesSection.eyebrow}
+              title={servicesSection.title}
+              description={servicesSection.description}
+              className="lg:sticky lg:top-32"
+            />
+          </Reveal>
+        </div>
+
+        <div className="space-y-10">
+          <Reveal>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {serviceMedia.map((asset, index) => (
+                <PrototypeMedia
+                  key={asset.src}
+                  asset={asset}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  aspectClassName={index === 0 ? "aspect-[4/5]" : "aspect-[4/3] sm:mt-14"}
+                  className="rounded-[1.5rem]"
+                />
+              ))}
+            </div>
+          </Reveal>
+
+          <div className="divide-y border-y">
+            {services.map((service, index) => (
+              <Reveal key={service.title} delay={Math.min(index * 35, 210)}>
+                <div className="flex items-center justify-between gap-6 py-5 sm:py-6">
+                  <h3 className="text-xl font-medium tracking-tight sm:text-2xl">{service.title}</h3>
+                  <span className="text-xs font-medium tabular-nums text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

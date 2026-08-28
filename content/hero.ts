@@ -5,4 +5,10 @@ export interface HeroContent extends SectionCopy {
   actions: ContentAction[];
 }
 
-export const heroContent: HeroContent | null = null;
+export const heroContent: HeroContent = {
+  eyebrow: "Garitas Property Care",
+  title: "One Membership. Every Season.",
+  description: "Your property. Taken care of.",
+  mediaKey: "hero-primary",
+  actions: [],
+};

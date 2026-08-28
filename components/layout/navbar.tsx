@@ -17,63 +17,59 @@ import { siteConfig } from "@/config/site";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const hasNavigation = siteConfig.navigation.length > 0;
 
   return (
-    <header className="sticky top-5 z-40 mx-auto flex w-[90%] max-w-screen-xl items-center justify-between rounded-2xl border border-secondary bg-card p-2 shadow-inner md:w-[80%] lg:w-[75%]">
-      <Link href="/" className="px-2 text-lg font-bold">
+    <header className="sticky top-4 z-40 mx-auto mt-4 flex w-[calc(100%-2rem)] max-w-6xl items-center justify-between rounded-full border border-border/80 bg-background/85 px-3 py-2 shadow-[0_14px_45px_-30px_hsl(var(--foreground))] backdrop-blur-xl sm:px-4">
+      <Link
+        href="/#hero"
+        className="rounded-full px-2 py-1 text-sm font-semibold tracking-tight sm:text-base"
+      >
         {siteConfig.name}
       </Link>
 
-      {hasNavigation ? (
-        <>
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
-            {siteConfig.navigation.map(({ href, label }) => (
-              <Button key={href} asChild variant="ghost" size="sm">
-                <Link href={href}>{label}</Link>
-              </Button>
-            ))}
-          </nav>
+      <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+        {siteConfig.navigation.map(({ href, label }) => (
+          <Button key={href} asChild variant="ghost" size="sm" className="rounded-full">
+            <Link href={href}>{label}</Link>
+          </Button>
+        ))}
+      </nav>
 
-          <div className="lg:hidden">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
+      <div className="lg:hidden">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="rounded-full"
+              aria-label="Open navigation"
+            >
+              <Menu className="size-5" aria-hidden="true" />
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent side="right" className="flex flex-col bg-background">
+            <SheetHeader className="text-left">
+              <SheetTitle>{siteConfig.name}</SheetTitle>
+            </SheetHeader>
+            <Separator />
+            <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+              {siteConfig.navigation.map(({ href, label }) => (
                 <Button
-                  type="button"
+                  key={href}
+                  asChild
                   variant="ghost"
-                  size="icon"
-                  aria-label="Open navigation"
+                  className="justify-start text-base"
+                  onClick={() => setIsOpen(false)}
                 >
-                  <Menu className="size-5" aria-hidden="true" />
+                  <Link href={href}>{label}</Link>
                 </Button>
-              </SheetTrigger>
-
-              <SheetContent
-                side="left"
-                className="flex flex-col rounded-br-2xl rounded-tr-2xl border-secondary bg-card"
-              >
-                <SheetHeader className="text-left">
-                  <SheetTitle>{siteConfig.name}</SheetTitle>
-                </SheetHeader>
-                <Separator />
-                <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
-                  {siteConfig.navigation.map(({ href, label }) => (
-                    <Button
-                      key={href}
-                      asChild
-                      variant="ghost"
-                      className="justify-start text-base"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <Link href={href}>{label}</Link>
-                    </Button>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </>
-      ) : null}
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 };

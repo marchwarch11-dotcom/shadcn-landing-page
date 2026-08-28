@@ -5,4 +5,8 @@ export interface FinalCtaContent extends SectionCopy {
   whatsappMessage?: string;
 }
 
-export const finalCtaContent: FinalCtaContent | null = null;
+export const finalCtaContent: FinalCtaContent = {
+  eyebrow: "Plan",
+  title: "Let’s build your plan.",
+  whatsappLabel: "WhatsApp",
+};

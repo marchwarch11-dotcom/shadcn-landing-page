@@ -13,5 +13,8 @@ export interface TeamMember {
   links: TeamLink[];
 }
 
-export const teamSection: SectionCopy | null = null;
+export const teamSection: SectionCopy = {
+  title: "The Team",
+};
+
 export const teamMembers: TeamMember[] = [];

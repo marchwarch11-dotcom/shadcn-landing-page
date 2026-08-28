@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 import type { MediaAsset } from "@/content/media";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,8 @@ interface PrototypeMediaProps {
   aspectClassName: string;
   priority?: boolean;
   className?: string;
+  imageClassName?: string;
+  children?: ReactNode;
 }
 
 export const PrototypeMedia = ({
@@ -17,11 +20,13 @@ export const PrototypeMedia = ({
   aspectClassName,
   priority = false,
   className,
+  imageClassName,
+  children,
 }: PrototypeMediaProps) => {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl bg-muted",
+        "relative overflow-hidden rounded-2xl bg-muted",
         aspectClassName,
         className,
       )}
@@ -32,10 +37,11 @@ export const PrototypeMedia = ({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover"
+        className={cn("object-cover", imageClassName)}
       />
+      {children}
       {asset.temporary ? (
-        <span className="absolute bottom-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur-sm">
+        <span className="absolute right-3 top-3 z-20 rounded-full border border-white/20 bg-black/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
           Prototype stock
         </span>
       ) : null}
