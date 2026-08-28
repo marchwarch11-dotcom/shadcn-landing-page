@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
+
 import { Navbar } from "@/components/layout/navbar";
-import { ThemeProvider } from "@/components/layout/theme-provider";
+import { cn } from "@/lib/utils";
+
+import "./globals.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "Garitas Property Care",
 };
 
 export default function RootLayout({
@@ -17,18 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
+    <html lang="en">
       <body className={cn("min-h-screen bg-background", inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+        <a
+          href="#main-content"
+          className="sr-only z-50 rounded-md bg-background px-4 py-2 text-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
         >
-          <Navbar />
-
-          {children}
-        </ThemeProvider>
+          Skip to content
+        </a>
+        <Navbar />
+        {children}
       </body>
     </html>
   );

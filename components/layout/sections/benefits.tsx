@@ -1,81 +1,65 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Icon } from "@/components/ui/icon";
-import { icons } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-interface BenefitsProps {
-  icon: string;
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export interface BenefitItem {
   title: string;
   description: string;
+  icon?: LucideIcon;
 }
 
-const benefitList: BenefitsProps[] = [
-  {
-    icon: "Blocks",
-    title: "Build Brand Trust",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
-  },
-  {
-    icon: "LineChart",
-    title: "More Leads",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, natus consectetur.",
-  },
-  {
-    icon: "Wallet",
-    title: "Higher Conversions",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur. A odio velit cum aliquam",
-  },
-  {
-    icon: "Sparkle",
-    title: "Test Marketing Ideas",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
-  },
-];
+interface BenefitsSectionProps {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
+  items: BenefitItem[];
+}
 
-export const BenefitsSection = () => {
+export const BenefitsSection = ({
+  id = "benefits",
+  eyebrow,
+  title,
+  description,
+  items,
+}: BenefitsSectionProps) => {
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
-    <section id="benefits" className="container py-24 sm:py-32">
-      <div className="grid lg:grid-cols-2 place-items-center lg:gap-24">
+    <section id={id} className="container py-24 sm:py-32">
+      <div className="grid place-items-center lg:grid-cols-2 lg:gap-24">
         <div>
-          <h2 className="text-lg text-primary mb-2 tracking-wider">Benefits</h2>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Your Shortcut to Success
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non
-            ducimus reprehenderit architecto rerum similique facere odit
-            deleniti necessitatibus quo quae.
-          </p>
+          <p className="mb-2 text-lg tracking-wider text-primary">{eyebrow}</p>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{title}</h2>
+          {description ? (
+            <p className="mb-8 text-xl text-muted-foreground">{description}</p>
+          ) : null}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-4 w-full">
-          {benefitList.map(({ icon, title, description }, index) => (
+        <div className="grid w-full gap-4 lg:grid-cols-2">
+          {items.map(({ icon: Icon, title: itemTitle, description: itemDescription }, index) => (
             <Card
-              key={title}
-              className="bg-muted/50 dark:bg-card hover:bg-background transition-all delay-75 group/number"
+              key={itemTitle}
+              className="group/number bg-muted/50 transition-colors hover:bg-background"
             >
               <CardHeader>
                 <div className="flex justify-between">
-                  <Icon
-                    name={icon as keyof typeof icons}
-                    size={32}
-                    color="hsl(var(--primary))"
-                    className="mb-6 text-primary"
-                  />
-                  <span className="text-5xl text-muted-foreground/15 font-medium transition-all delay-75 group-hover/number:text-muted-foreground/30">
-                    0{index + 1}
+                  {Icon ? <Icon className="mb-6 size-8 text-primary" aria-hidden="true" /> : <span />}
+                  <span className="text-5xl font-medium text-muted-foreground/15 transition-colors group-hover/number:text-muted-foreground/30">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-
-                <CardTitle>{title}</CardTitle>
+                <CardTitle>{itemTitle}</CardTitle>
               </CardHeader>
-
               <CardContent className="text-muted-foreground">
-                {description}
+                {itemDescription}
               </CardContent>
             </Card>
           ))}
