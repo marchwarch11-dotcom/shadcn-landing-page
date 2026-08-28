@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download temporary Unsplash assets
+      - name: Download temporary Pexels assets
         shell: bash
         run: |
           set -euo pipefail
@@ -32,25 +32,25 @@ jobs:
             local id="$1"
             local destination="$2"
             curl -L --fail --retry 3 --retry-delay 2 \
-              "https://unsplash.com/photos/${id}/download?force=true&w=1800" \
+              "https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1800" \
               -o "$destination"
             test -s "$destination"
             file "$destination" | grep -Eiq 'JPEG|image'
           }
 
-          download "t0CsdU0wopU" "public/garitas-temp/hero/hero-temp-01.jpg"
-          download "184tM0HpxPA" "public/garitas-temp/seasons/spring-temp-01.jpg"
-          download "Adml9nvXBqw" "public/garitas-temp/seasons/summer-temp-01.jpg"
-          download "y2p8sMFHOVs" "public/garitas-temp/seasons/fall-temp-01.jpg"
-          download "pdaCycH3HuQ" "public/garitas-temp/seasons/winter-temp-01.jpg"
-          download "67XudSXgB5U" "public/garitas-temp/services/services-temp-01.jpg"
-          download "wUv846iaFsw" "public/garitas-temp/services/services-temp-02.jpg"
-          download "gNCOF0GQ08M" "public/garitas-temp/about/about-temp-01.jpg"
-          download "jYJBC_S_Cps" "public/garitas-temp/team/team-temp-01.jpg"
-          download "bsld7GjQwjI" "public/garitas-temp/work/work-temp-01.jpg"
-          download "ngHnAXs_5eE" "public/garitas-temp/work/work-temp-02.jpg"
-          download "7bCsEyLV5Go" "public/garitas-temp/commercial/commercial-temp-01.jpg"
-          download "dqhC2Oh1Ps4" "public/garitas-temp/snow/snow-temp-01.jpg"
+          download "7031604" "public/garitas-temp/hero/hero-temp-01.jpg"
+          download "16500525" "public/garitas-temp/seasons/spring-temp-01.jpg"
+          download "16805356" "public/garitas-temp/seasons/summer-temp-01.jpg"
+          download "19102762" "public/garitas-temp/seasons/fall-temp-01.jpg"
+          download "4272164" "public/garitas-temp/seasons/winter-temp-01.jpg"
+          download "28180214" "public/garitas-temp/services/services-temp-01.jpg"
+          download "5027602" "public/garitas-temp/services/services-temp-02.jpg"
+          download "4963425" "public/garitas-temp/about/about-temp-01.jpg"
+          download "35065154" "public/garitas-temp/team/team-temp-01.jpg"
+          download "6728925" "public/garitas-temp/work/work-temp-01.jpg"
+          download "5231137" "public/garitas-temp/work/work-temp-02.jpg"
+          download "11176809" "public/garitas-temp/commercial/commercial-temp-01.jpg"
+          download "6952447" "public/garitas-temp/snow/snow-temp-01.jpg"
 
       - name: Commit assets and remove temporary workflow
         shell: bash
