@@ -9,16 +9,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { media } from "@/content/media";
-import { teamMembers } from "@/content/team";
+import { teamMembers, teamSection } from "@/content/team";
 
 export const TeamSection = () => {
-  if (teamMembers.length === 0) {
+  if (!teamSection || teamMembers.length === 0) {
     return null;
   }
 
   return (
-    <section id="team" className="container py-24 sm:py-32 lg:w-[75%]">
-      <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">Team</h2>
+    <section id="team" className="container py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        {teamSection.eyebrow ? (
+          <p className="mb-2 text-lg tracking-wider text-primary">{teamSection.eyebrow}</p>
+        ) : null}
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{teamSection.title}</h2>
+        {teamSection.description ? (
+          <p className="text-lg text-muted-foreground sm:text-xl">{teamSection.description}</p>
+        ) : null}
+      </div>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {teamMembers.map((member) => {

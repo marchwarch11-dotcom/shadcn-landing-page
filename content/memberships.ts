@@ -1,3 +1,5 @@
+import type { SectionCopy } from "@/content/types";
+
 export interface Membership {
   name: string;
   description?: string;
@@ -7,4 +9,5 @@ export interface Membership {
   featured?: boolean;
 }
 
+export const membershipSection: SectionCopy | null = null;
 export const memberships: Membership[] = [];

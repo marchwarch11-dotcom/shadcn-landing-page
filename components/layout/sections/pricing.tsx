@@ -7,16 +7,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { memberships } from "@/content/memberships";
+import { membershipSection, memberships } from "@/content/memberships";
 
-export const PricingSection = () => {
-  if (memberships.length === 0) {
+export const MembershipsSection = () => {
+  if (!membershipSection || memberships.length === 0) {
     return null;
   }
 
   return (
-    <section id="memberships" className="container py-24 sm:py-32">
-      <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">Memberships</h2>
+    <section id="memberships" className="container py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        {membershipSection.eyebrow ? (
+          <p className="mb-2 text-lg tracking-wider text-primary">{membershipSection.eyebrow}</p>
+        ) : null}
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{membershipSection.title}</h2>
+        {membershipSection.description ? (
+          <p className="text-lg text-muted-foreground sm:text-xl">
+            {membershipSection.description}
+          </p>
+        ) : null}
+      </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
         {memberships.map(({ name, description, priceLabel, credits, benefits, featured }) => (
@@ -47,3 +57,5 @@ export const PricingSection = () => {
     </section>
   );
 };
+
+export const PricingSection = MembershipsSection;

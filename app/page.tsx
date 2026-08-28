@@ -1,17 +1,35 @@
+import { AboutSection } from "@/components/layout/sections/about";
+import { CommercialSection } from "@/components/layout/sections/commercial";
+import { FinalCtaSection } from "@/components/layout/sections/final-cta";
 import { FooterSection } from "@/components/layout/sections/footer";
-import { PricingSection } from "@/components/layout/sections/pricing";
+import { HeroSection } from "@/components/layout/sections/hero";
+import { MemberCreditsSection } from "@/components/layout/sections/member-credits";
+import { MembershipsSection } from "@/components/layout/sections/pricing";
+import { RealWorkSection } from "@/components/layout/sections/real-work";
+import { SeasonalExperienceSection } from "@/components/layout/sections/seasonal-experience";
+import { ServicePrioritySection } from "@/components/layout/sections/service-priority";
 import { ServicesSection } from "@/components/layout/sections/services";
+import { SnowSection } from "@/components/layout/sections/snow";
 import { TeamSection } from "@/components/layout/sections/team";
-import { TestimonialSection } from "@/components/layout/sections/testimonial";
+import { TestimonialsSection } from "@/components/layout/sections/testimonial";
 
 export default function Home() {
   return (
     <>
       <main id="main-content" className="min-h-[50vh]">
+        <HeroSection />
+        <SeasonalExperienceSection />
+        <MembershipsSection />
         <ServicesSection />
-        <PricingSection />
+        <MemberCreditsSection />
+        <ServicePrioritySection />
+        <AboutSection />
         <TeamSection />
-        <TestimonialSection />
+        <RealWorkSection />
+        <TestimonialsSection />
+        <CommercialSection />
+        <SnowSection />
+        <FinalCtaSection />
       </main>
       <FooterSection />
     </>

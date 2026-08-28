@@ -15,7 +15,7 @@ export interface FeatureItem {
 
 interface FeaturesSectionProps {
   id?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   items: FeatureItem[];
@@ -33,14 +33,16 @@ export const FeaturesSection = ({
   }
 
   return (
-    <section id={id} className="container py-24 sm:py-32">
-      <p className="mb-2 text-center text-lg tracking-wider text-primary">{eyebrow}</p>
-      <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">{title}</h2>
-      {description ? (
-        <p className="mx-auto mb-8 text-center text-xl text-muted-foreground md:w-1/2">
-          {description}
-        </p>
-      ) : null}
+    <section id={id} className="container py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        {eyebrow ? (
+          <p className="mb-2 text-lg tracking-wider text-primary">{eyebrow}</p>
+        ) : null}
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{title}</h2>
+        {description ? (
+          <p className="text-lg text-muted-foreground sm:text-xl">{description}</p>
+        ) : null}
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map(({ icon: Icon, title: itemTitle, description: itemDescription }) => (

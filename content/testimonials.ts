@@ -1,3 +1,5 @@
+import type { SectionCopy } from "@/content/types";
+
 export interface Testimonial {
   quote: string;
   name: string;
@@ -6,4 +8,5 @@ export interface Testimonial {
   imageKey?: string;
 }
 
+export const testimonialsSection: SectionCopy | null = null;
 export const testimonials: Testimonial[] = [];

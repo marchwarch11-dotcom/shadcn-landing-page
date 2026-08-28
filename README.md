@@ -1,6 +1,6 @@
 # Garitas Property Care
 
-This repository is the cleaned Next.js foundation for the Garitas Property Care website. It is intentionally **not** the final landing-page implementation yet: the cleanup phase removes template/demo behavior, preserves reusable UI patterns, and establishes clear content and media boundaries without inventing business information.
+This repository contains the Next.js foundation for the Garitas Property Care landing page. Phase 1 establishes the complete landing-page structure and content boundaries without inventing business copy, pricing, services, testimonials, contact details, or media.
 
 ## Stack
 
@@ -10,7 +10,7 @@ This repository is the cleaned Next.js foundation for the Garitas Property Care 
 - shadcn/ui primitives
 - Vercel-compatible deployment
 
-The repository currently remains on its existing framework versions. Dependency upgrades are a separate maintenance task and should not be mixed into the Garitas design implementation.
+The project intentionally remains on its existing framework versions. Dependency upgrades are a separate maintenance task and should not be mixed into landing-page implementation.
 
 ## Local development
 
@@ -26,40 +26,52 @@ npm run lint
 npm run build
 ```
 
-## Repository boundaries
+## Landing structure
 
-### Presentation
+`app/page.tsx` composes the landing in this order:
 
-Reusable layout and section presentation lives under `components/`. The retained Benefits, Features, Services, Membership/Pricing, Team, Testimonial, and Footer patterns should be adapted during the approved landing implementation rather than replaced without reason.
+1. Hero
+2. Seasonal Experience
+3. Memberships
+4. Property Care / Services
+5. Member Service Credits
+6. Service Priority
+7. About Us
+8. The Team
+9. Real Work / Proof
+10. Testimonials
+11. Commercial / Priority
+12. Snow
+13. Final CTA / WhatsApp
 
-### Content
+Each major section has its own component under `components/layout/sections/`. Existing reusable presentation patterns such as Benefits and Features remain available and are composed by the Garitas-specific section wrappers rather than duplicated.
 
-Future business content lives under `content/`:
+## Content boundary
 
-- `content/memberships.ts`
-- `content/services.ts`
-- `content/team.ts`
-- `content/testimonials.ts`
-- `content/media.ts`
+Business content lives under `content/`, separate from JSX presentation. Phase 1 intentionally leaves unavailable content as `null` or empty collections. Sections return `null` until their corresponding approved data exists, so the branch does not ship demo or invented marketing content.
 
-These collections are intentionally empty until approved Garitas copy and media are supplied. Components should not embed demo names, testimonials, prices, contact details, or remote stock imagery.
+Shared section-copy and action types live in `content/types.ts`. Memberships, services, team members, testimonials, seasonal content, proof media, and other section-specific data can be replaced independently without rewriting `app/page.tsx`.
 
-### Public site configuration
+## Media boundary
 
-`config/site.ts` holds small public-site settings. Public phone and WhatsApp values remain `null` until the real numbers are supplied. Do not invent contact details or construct a production WhatsApp CTA before then.
+`content/media.ts` is the central mapping between content records and real media assets. Each asset is classified by landing section. Real files should be added under `public/garitas/<section>/` when supplied and referenced through the media map; no placeholder assets should be committed.
 
-### Media
+Use `next/image`, stable dimensions/aspect ratios and appropriate `sizes`. Reserve `priority` for the eventual hero/LCP asset.
 
-Real Garitas assets should be stored locally under `public/` and referenced through `content/media.ts`. Prefer `next/image`, explicit image dimensions or stable aspect ratios, appropriate `sizes`, and `priority` only for the eventual LCP image. Demo and placeholder media should not be added.
+## Configuration and WhatsApp
 
-### Animation
+Public site configuration lives in `config/site.ts`. The real phone and WhatsApp numbers remain `null` until supplied. `lib/whatsapp.ts` returns no URL when the number is unavailable, so the final CTA cannot accidentally create a fake WhatsApp destination.
 
-There is no animation framework in the cleanup foundation. Future seasonal/environmental effects belong in isolated progressive-enhancement boundaries and must remain separate from global theme state. Start with CSS and browser APIs where sufficient, honor `prefers-reduced-motion`, and only add an animation dependency after a specific approved interaction requires it.
+Navigation remains configuration-driven and empty until real section destinations are approved. The responsive Sheet foundation is preserved without dead links.
+
+## Animation boundary
+
+Phase 1 does not implement seasonal animation or add an animation dependency. Future motion should remain progressive enhancement, isolated from content components and independent from global theme state. When Phase 2 defines actual interactions, animation utilities/components can be introduced only where they are required and must honor `prefers-reduced-motion`.
 
 ## Deployment
 
-The project preserves the standard GitHub-to-Vercel workflow. No `vercel.json` is required for the current Next.js foundation. When the repository is connected to Vercel, branch and pull-request deployments can be used for review before production changes are merged.
+The standard GitHub-to-Vercel workflow remains unchanged. Use branch and pull-request previews for review before any production merge. Do not merge implementation work directly to `main`.
 
-## Content required before final landing implementation
+## Inputs still required
 
-The next implementation phase still needs approved Garitas copy, membership details and pricing decisions, service data, team information, testimonials/client proof, real media, production locale, production domain, and the real public contact/WhatsApp number. A real Garitas favicon/brand asset is also required before replacing the existing favicon.
+Phase 2 still requires approved Garitas copy, membership details and pricing decisions, service data, member-credit/service-priority details, Alex and Raimundo content, team information, real-work proof, testimonials, commercial and snow content, real media/brand assets, production locale/domain, and the real public contact/WhatsApp number.

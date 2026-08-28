@@ -16,16 +16,26 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { media } from "@/content/media";
-import { testimonials } from "@/content/testimonials";
+import { testimonials, testimonialsSection } from "@/content/testimonials";
 
-export const TestimonialSection = () => {
-  if (testimonials.length === 0) {
+export const TestimonialsSection = () => {
+  if (!testimonialsSection || testimonials.length === 0) {
     return null;
   }
 
   return (
-    <section id="client-proof" className="container py-24 sm:py-32">
-      <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">Client proof</h2>
+    <section id="testimonials" className="container py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        {testimonialsSection.eyebrow ? (
+          <p className="mb-2 text-lg tracking-wider text-primary">{testimonialsSection.eyebrow}</p>
+        ) : null}
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{testimonialsSection.title}</h2>
+        {testimonialsSection.description ? (
+          <p className="text-lg text-muted-foreground sm:text-xl">
+            {testimonialsSection.description}
+          </p>
+        ) : null}
+      </div>
 
       <Carousel
         opts={{ align: "start" }}
@@ -86,3 +96,5 @@ export const TestimonialSection = () => {
     </section>
   );
 };
+
+export const TestimonialSection = TestimonialsSection;
