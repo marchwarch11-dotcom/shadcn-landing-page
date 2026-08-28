@@ -1,7 +1,10 @@
+export type ContentStatus = "provisional" | "approved";
+
 export interface SectionCopy {
   eyebrow?: string;
   title: string;
   description?: string;
+  status?: ContentStatus;
 }
 
 export interface ContentAction {

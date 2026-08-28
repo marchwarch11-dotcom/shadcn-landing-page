@@ -14,7 +14,10 @@ export interface TeamMember {
 }
 
 export const teamSection: SectionCopy = {
-  title: "The Team",
+  status: "provisional",
+  eyebrow: "The team",
+  title: "Hands-on care, carried out by a local team.",
+  description: "Property care comes down to people doing the work and paying attention to the details. Individual team profiles will be added when approved.",
 };
 
 export const teamMembers: TeamMember[] = [];

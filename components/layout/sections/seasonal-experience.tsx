@@ -39,7 +39,7 @@ export const SeasonalExperienceSection = () => {
             <Reveal key={season.key} delay={index * 70}>
               <article
                 className={cn(
-                  "group overflow-hidden rounded-[1.5rem] border p-3 transition-transform duration-300 hover:-translate-y-1",
+                  "group h-full overflow-hidden rounded-[1.5rem] border p-3 transition-transform duration-300 hover:-translate-y-1",
                   seasonSurface[season.key],
                 )}
               >
@@ -52,11 +52,18 @@ export const SeasonalExperienceSection = () => {
                     imageClassName="transition-transform duration-700 group-hover:scale-[1.025]"
                   />
                 ) : null}
-                <div className="flex items-center justify-between px-2 pb-2 pt-4">
-                  <h3 className="text-xl font-semibold tracking-tight">{season.title}</h3>
-                  <span className="text-xs font-medium tabular-nums text-muted-foreground">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                <div className="px-2 pb-3 pt-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-xl font-semibold tracking-tight">{season.title}</h3>
+                    <span className="text-xs font-medium tabular-nums text-muted-foreground">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  {season.description ? (
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                      {season.description}
+                    </p>
+                  ) : null}
                 </div>
               </article>
             </Reveal>

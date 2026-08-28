@@ -35,6 +35,14 @@ export const MemberCreditsSection = () => {
           </Reveal>
         ))}
       </div>
+
+      {memberCreditsContent.note ? (
+        <Reveal>
+          <p className="mt-6 max-w-3xl text-sm leading-6 text-muted-foreground">
+            {memberCreditsContent.note}
+          </p>
+        </Reveal>
+      ) : null}
     </section>
   );
 };

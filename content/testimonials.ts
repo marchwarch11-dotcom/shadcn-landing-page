@@ -8,5 +8,16 @@ export interface Testimonial {
   imageKey?: string;
 }
 
-export const testimonialsSection: SectionCopy | null = null;
+export interface TestimonialsSectionContent extends SectionCopy {
+  emptyState: string;
+}
+
+export const testimonialsSection: TestimonialsSectionContent = {
+  status: "provisional",
+  eyebrow: "Testimonials",
+  title: "Client feedback belongs here when it is real.",
+  description: "No customer quotes are being fabricated for the prototype.",
+  emptyState: "Approved Garitas testimonials have not been added yet.",
+};
+
 export const testimonials: Testimonial[] = [];

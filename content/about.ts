@@ -13,8 +13,13 @@ export interface AboutContent extends SectionCopy {
 }
 
 export const aboutContent: AboutContent = {
-  eyebrow: "About Us",
+  status: "provisional",
+  eyebrow: "About us",
   title: "Alex & Raimundo",
+  description: "The people at the center of Garitas Property Care. Their individual roles, background, and full story will be added once the owners approve the final narrative.",
   mediaKey: "about-pair",
-  people: [],
+  people: [
+    { name: "Alex" },
+    { name: "Raimundo" },
+  ],
 };

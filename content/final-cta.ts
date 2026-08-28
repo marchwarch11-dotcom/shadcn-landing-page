@@ -6,7 +6,9 @@ export interface FinalCtaContent extends SectionCopy {
 }
 
 export const finalCtaContent: FinalCtaContent = {
-  eyebrow: "Plan",
+  status: "provisional",
+  eyebrow: "Start with the property",
   title: "Let’s build your plan.",
-  whatsappLabel: "WhatsApp",
+  description: "Bring the property, the priorities, and the seasonal needs together in one clear plan.",
+  whatsappLabel: "Start on WhatsApp",
 };

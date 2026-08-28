@@ -6,6 +6,7 @@ export interface HeroContent extends SectionCopy {
 }
 
 export const heroContent: HeroContent = {
+  status: "provisional",
   eyebrow: "Garitas Property Care",
   title: "One Membership. Every Season.",
   description: "Your property. Taken care of.",

@@ -2,40 +2,42 @@ import type { SectionCopy } from "@/content/types";
 
 export interface Membership {
   name: string;
-  description?: string;
+  market: "Residential" | "Commercial";
+  summary: string;
   priceLabel?: string;
-  credits?: string;
+  credits: string;
   benefits: string[];
   featured?: boolean;
-  provisional?: boolean;
 }
 
 export const membershipSection: SectionCopy = {
+  status: "provisional",
   eyebrow: "Memberships",
-  title: "Membership levels",
+  title: "Three levels of care. One year-round approach.",
+  description: "Choose the level of flexibility and service priority that best fits the property. Final service allocation is determined through consultation.",
 };
 
 export const memberships: Membership[] = [
   {
     name: "Essential",
-    description: "Residential",
+    market: "Residential",
+    summary: "A focused residential level with one Member Service Credit and the standard service-priority position.",
     credits: "1 Member Service Credit",
     benefits: [],
-    provisional: true,
   },
   {
     name: "Complete",
-    description: "Residential",
+    market: "Residential",
+    summary: "A broader residential level with two Member Service Credits and higher service priority.",
     credits: "2 Member Service Credits",
     benefits: [],
-    provisional: true,
   },
   {
     name: "Priority",
-    description: "Commercial",
+    market: "Commercial",
+    summary: "A commercial-focused level with three Member Service Credits and the highest service priority.",
     credits: "3 Member Service Credits",
     benefits: [],
     featured: true,
-    provisional: true,
   },
 ];

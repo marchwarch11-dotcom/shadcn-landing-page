@@ -43,8 +43,11 @@ export const ServicesSection = () => {
           <div className="divide-y border-y">
             {services.map((service, index) => (
               <Reveal key={service.title} delay={Math.min(index * 35, 210)}>
-                <div className="flex items-center justify-between gap-6 py-5 sm:py-6">
+                <div className="grid gap-3 py-5 sm:grid-cols-[1fr_1.25fr_auto] sm:items-start sm:gap-6 sm:py-6">
                   <h3 className="text-xl font-medium tracking-tight sm:text-2xl">{service.title}</h3>
+                  <p className="text-sm leading-6 text-muted-foreground sm:text-base">
+                    {service.description}
+                  </p>
                   <span className="text-xs font-medium tabular-nums text-muted-foreground">
                     {String(index + 1).padStart(2, "0")}
                   </span>

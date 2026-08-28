@@ -6,11 +6,13 @@ export interface SnowContent extends SectionCopy {
 }
 
 export const snowContent: SnowContent = {
-  eyebrow: "Winter",
-  title: "Snow",
-  description: "Snow removal begins at 2 inches.",
+  status: "provisional",
+  eyebrow: "Winter care",
+  title: "Snow becomes the priority when conditions call for it.",
+  description: "Snow service begins at 2 inches.",
   mediaKey: "snow-removal",
   details: [
-    "Commercial snow service normally involves two visits during a snow event, generally around opening and closing, subject to the customer’s operational needs and agreement.",
+    "Commercial snow service is normally performed twice during a snow event, typically around opening and closing.",
+    "Exact timing and operational arrangements can be agreed with the commercial customer based on their needs.",
   ],
 };
