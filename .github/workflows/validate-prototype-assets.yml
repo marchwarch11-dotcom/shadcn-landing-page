@@ -1,0 +1,57 @@
+name: Validate prototype assets
+
+on:
+  push:
+    branches:
+      - garitas-cleanup-foundation
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Verify local prototype images
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            public/garitas-temp/hero/hero-temp-01.jpg
+            public/garitas-temp/seasons/spring-temp-01.jpg
+            public/garitas-temp/seasons/summer-temp-01.jpg
+            public/garitas-temp/seasons/fall-temp-01.jpg
+            public/garitas-temp/seasons/winter-temp-01.jpg
+            public/garitas-temp/services/services-temp-01.jpg
+            public/garitas-temp/services/services-temp-02.jpg
+            public/garitas-temp/about/about-temp-01.jpg
+            public/garitas-temp/team/team-temp-01.jpg
+            public/garitas-temp/work/work-temp-01.jpg
+            public/garitas-temp/work/work-temp-02.jpg
+            public/garitas-temp/commercial/commercial-temp-01.jpg
+            public/garitas-temp/snow/snow-temp-01.jpg
+          )
+          for asset in "${files[@]}"; do
+            test -s "$asset"
+            file "$asset" | grep -Eiq 'JPEG|image'
+          done
+      - name: Install exact dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Remove temporary validation workflow
+        shell: bash
+        run: |
+          rm .github/workflows/validate-prototype-assets.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/validate-prototype-assets.yml
+          git commit -m "chore: remove prototype asset validation workflow"
+          git push
