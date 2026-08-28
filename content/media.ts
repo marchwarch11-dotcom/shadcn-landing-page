@@ -14,7 +14,7 @@ export type MediaSection =
   | "final-cta";
 
 export interface MediaSource {
-  provider: "Unsplash";
+  provider: "Pexels";
   photographer: string;
   pageUrl: string;
 }
@@ -36,42 +36,42 @@ export const media = {
     alt: "Temporary stock photograph of a maintained residential property and lawn",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Roger Starnes Sr",
-      pageUrl: "https://unsplash.com/photos/t0CsdU0wopU",
+      provider: "Pexels",
+      photographer: "Max Vakhtbovych",
+      pageUrl: "https://www.pexels.com/photo/courtyard-of-modern-villa-with-glass-walls-7031604/",
     },
   },
   "season-spring": {
     section: "seasonal-experience",
     src: "/garitas-temp/seasons/spring-temp-01.jpg",
-    alt: "Temporary stock photograph of a landscaped spring garden",
+    alt: "Temporary stock photograph of a blooming landscaped spring garden",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "QY Liu",
-      pageUrl: "https://unsplash.com/photos/184tM0HpxPA",
+      provider: "Pexels",
+      photographer: "Serhii Volyk",
+      pageUrl: "https://www.pexels.com/photo/blooming-spring-garden-16500525/",
     },
   },
   "season-summer": {
     section: "seasonal-experience",
     src: "/garitas-temp/seasons/summer-temp-01.jpg",
-    alt: "Temporary stock photograph of a green summer lawn and mature trees",
+    alt: "Temporary stock photograph of a green summer lawn and trees",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Arlind Photography",
-      pageUrl: "https://unsplash.com/photos/Adml9nvXBqw",
+      provider: "Pexels",
+      photographer: "Egor Komarov",
+      pageUrl: "https://www.pexels.com/photo/trees-on-a-green-lawn-in-summer-16805356/",
     },
   },
   "season-fall": {
     section: "seasonal-experience",
     src: "/garitas-temp/seasons/fall-temp-01.jpg",
-    alt: "Temporary stock photograph of a landscaped garden with fall foliage",
+    alt: "Temporary stock photograph of a landscaped garden with autumn foliage",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Sergej Karpow",
-      pageUrl: "https://unsplash.com/photos/y2p8sMFHOVs",
+      provider: "Pexels",
+      photographer: "Olena Bohovyk",
+      pageUrl: "https://www.pexels.com/photo/garden-in-autumn-19102762/",
     },
   },
   "season-winter": {
@@ -80,9 +80,9 @@ export const media = {
     alt: "Temporary stock photograph of a snow-covered residential yard",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Somesh Harshavardhan",
-      pageUrl: "https://unsplash.com/photos/pdaCycH3HuQ",
+      provider: "Pexels",
+      photographer: "Joshua Miranda",
+      pageUrl: "https://www.pexels.com/photo/suburban-settlement-cottages-during-snowy-winter-day-4272164/",
     },
   },
   "services-lawn-care": {
@@ -91,20 +91,20 @@ export const media = {
     alt: "Temporary stock photograph of lawn mowing at a residential property",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Kenny Perez",
-      pageUrl: "https://unsplash.com/photos/67XudSXgB5U",
+      provider: "Pexels",
+      photographer: "PROSPER MBEMBA KOUTIHOU",
+      pageUrl: "https://www.pexels.com/photo/mower-28180214/",
     },
   },
   "services-garden-care": {
     section: "services",
     src: "/garitas-temp/services/services-temp-02.jpg",
-    alt: "Temporary stock photograph of gardening and plant care",
+    alt: "Temporary stock photograph of garden trimming and plant care",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Emma Renly",
-      pageUrl: "https://unsplash.com/photos/wUv846iaFsw",
+      provider: "Pexels",
+      photographer: "Anna Shvets",
+      pageUrl: "https://www.pexels.com/photo/man-trimming-the-leaves-5027602/",
     },
   },
   "about-pair": {
@@ -113,20 +113,20 @@ export const media = {
     alt: "Temporary stock photograph of two professionals outdoors; not Alex or Raimundo",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Vitaly Gariev",
-      pageUrl: "https://unsplash.com/photos/gNCOF0GQ08M",
+      provider: "Pexels",
+      photographer: "Ketut Subiyanto",
+      pageUrl: "https://www.pexels.com/photo/photo-of-a-man-and-a-woman-in-a-business-attire-4963425/",
     },
   },
   "team-crew": {
     section: "team",
     src: "/garitas-temp/team/team-temp-01.jpg",
-    alt: "Temporary stock photograph of people working together outdoors; not the Garitas team",
+    alt: "Temporary stock photograph of a maintenance crew working outdoors; not the Garitas team",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Ridwan Abdurrohman",
-      pageUrl: "https://unsplash.com/photos/jYJBC_S_Cps",
+      provider: "Pexels",
+      photographer: "Sóc Năng Động",
+      pageUrl: "https://www.pexels.com/photo/urban-gardening-crew-maintaining-lush-city-park-35065154/",
     },
   },
   "work-lawn": {
@@ -135,9 +135,9 @@ export const media = {
     alt: "Temporary stock photograph of lawn care work; not Garitas work",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Michael Smith",
-      pageUrl: "https://unsplash.com/photos/bsld7GjQwjI",
+      provider: "Pexels",
+      photographer: "Magic K",
+      pageUrl: "https://www.pexels.com/photo/a-person-cutting-grass-with-a-lawn-mower-6728925/",
     },
   },
   "work-garden": {
@@ -146,9 +146,9 @@ export const media = {
     alt: "Temporary stock photograph of garden maintenance; not Garitas work",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Jane Thomson",
-      pageUrl: "https://unsplash.com/photos/ngHnAXs_5eE",
+      provider: "Pexels",
+      photographer: "Anna Shvets",
+      pageUrl: "https://www.pexels.com/photo/man-with-pruner-cultivating-green-plant-5231137/",
     },
   },
   "commercial-property": {
@@ -157,9 +157,9 @@ export const media = {
     alt: "Temporary stock photograph of a landscaped commercial building exterior",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Long Chung",
-      pageUrl: "https://unsplash.com/photos/7bCsEyLV5Go",
+      provider: "Pexels",
+      photographer: "Czapp Árpád",
+      pageUrl: "https://www.pexels.com/photo/office-building-11176809/",
     },
   },
   "snow-removal": {
@@ -168,9 +168,9 @@ export const media = {
     alt: "Temporary stock photograph of snow-removal work; not Garitas work",
     temporary: true,
     source: {
-      provider: "Unsplash",
-      photographer: "Yuriy Vertikov",
-      pageUrl: "https://unsplash.com/photos/dqhC2Oh1Ps4",
+      provider: "Pexels",
+      photographer: "www.kaboompics.com",
+      pageUrl: "https://www.pexels.com/photo/close-up-of-man-plowing-the-driveway-with-a-red-snow-shovel-6952447/",
     },
   },
 } satisfies Record<string, MediaAsset>;
