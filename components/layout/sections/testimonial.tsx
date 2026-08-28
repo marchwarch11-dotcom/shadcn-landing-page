@@ -43,7 +43,9 @@ export const TestimonialsSection = () => {
       >
         <CarouselContent>
           {testimonials.map((testimonial) => {
-            const image = testimonial.imageKey ? media[testimonial.imageKey] : undefined;
+            const image = testimonial.imageKey
+              ? media[testimonial.imageKey as keyof typeof media]
+              : undefined;
 
             return (
               <CarouselItem
