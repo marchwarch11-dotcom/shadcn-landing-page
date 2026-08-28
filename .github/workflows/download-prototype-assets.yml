@@ -1,0 +1,64 @@
+name: Download prototype assets
+
+on:
+  push:
+    branches:
+      - garitas-cleanup-foundation
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download temporary Unsplash assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p \
+            public/garitas-temp/hero \
+            public/garitas-temp/seasons \
+            public/garitas-temp/services \
+            public/garitas-temp/about \
+            public/garitas-temp/team \
+            public/garitas-temp/work \
+            public/garitas-temp/testimonials \
+            public/garitas-temp/commercial \
+            public/garitas-temp/snow
+
+          download() {
+            local id="$1"
+            local destination="$2"
+            curl -L --fail --retry 3 --retry-delay 2 \
+              "https://unsplash.com/photos/${id}/download?force=true&w=1800" \
+              -o "$destination"
+            test -s "$destination"
+            file "$destination" | grep -Eiq 'JPEG|image'
+          }
+
+          download "t0CsdU0wopU" "public/garitas-temp/hero/hero-temp-01.jpg"
+          download "184tM0HpxPA" "public/garitas-temp/seasons/spring-temp-01.jpg"
+          download "Adml9nvXBqw" "public/garitas-temp/seasons/summer-temp-01.jpg"
+          download "y2p8sMFHOVs" "public/garitas-temp/seasons/fall-temp-01.jpg"
+          download "pdaCycH3HuQ" "public/garitas-temp/seasons/winter-temp-01.jpg"
+          download "67XudSXgB5U" "public/garitas-temp/services/services-temp-01.jpg"
+          download "wUv846iaFsw" "public/garitas-temp/services/services-temp-02.jpg"
+          download "gNCOF0GQ08M" "public/garitas-temp/about/about-temp-01.jpg"
+          download "jYJBC_S_Cps" "public/garitas-temp/team/team-temp-01.jpg"
+          download "bsld7GjQwjI" "public/garitas-temp/work/work-temp-01.jpg"
+          download "ngHnAXs_5eE" "public/garitas-temp/work/work-temp-02.jpg"
+          download "7bCsEyLV5Go" "public/garitas-temp/commercial/commercial-temp-01.jpg"
+          download "dqhC2Oh1Ps4" "public/garitas-temp/snow/snow-temp-01.jpg"
+
+      - name: Commit assets and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/download-prototype-assets.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/garitas-temp content/media.ts components/media/prototype-media.tsx .github/workflows/download-prototype-assets.yml
+          git commit -m "assets: add temporary prototype stock images"
+          git push
