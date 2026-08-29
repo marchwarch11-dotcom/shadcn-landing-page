@@ -16,7 +16,7 @@ export const testimonialsSection: TestimonialsSectionContent = {
   status: "provisional",
   eyebrow: "Testimonials",
   title: "Client feedback belongs here when it is real.",
-  description: "No customer quotes are being fabricated for the prototype.",
+  description: "No customer quotes are being fabricated.",
   emptyState: "Approved Garitas testimonials have not been added yet.",
 };
 

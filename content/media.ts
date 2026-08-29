@@ -25,16 +25,14 @@ export interface MediaAsset {
   alt: string;
   width?: number;
   height?: number;
-  temporary?: boolean;
   source?: MediaSource;
 }
 
 export const media = {
   "hero-primary": {
     section: "hero",
-    src: "/garitas-temp/hero/hero-temp-01.jpg",
-    alt: "Temporary stock photograph of a maintained residential property and lawn",
-    temporary: true,
+    src: "/images/hero/hero.webp",
+    alt: "Stock photograph of a maintained residential property and lawn",
     source: {
       provider: "Pexels",
       photographer: "Max Vakhtbovych",
@@ -43,9 +41,8 @@ export const media = {
   },
   "season-spring": {
     section: "seasonal-experience",
-    src: "/garitas-temp/seasons/spring-temp-01.jpg",
-    alt: "Temporary stock photograph of a blooming landscaped spring garden",
-    temporary: true,
+    src: "/images/seasons/spring.webp",
+    alt: "Stock photograph of a blooming landscaped spring garden",
     source: {
       provider: "Pexels",
       photographer: "Serhii Volyk",
@@ -54,9 +51,8 @@ export const media = {
   },
   "season-summer": {
     section: "seasonal-experience",
-    src: "/garitas-temp/seasons/summer-temp-01.jpg",
-    alt: "Temporary stock photograph of a green summer lawn and trees",
-    temporary: true,
+    src: "/images/seasons/summer.webp",
+    alt: "Stock photograph of a green summer lawn and trees",
     source: {
       provider: "Pexels",
       photographer: "Egor Komarov",
@@ -65,9 +61,8 @@ export const media = {
   },
   "season-fall": {
     section: "seasonal-experience",
-    src: "/garitas-temp/seasons/fall-temp-01.jpg",
-    alt: "Temporary stock photograph of a landscaped garden with autumn foliage",
-    temporary: true,
+    src: "/images/seasons/fall.webp",
+    alt: "Stock photograph of a landscaped garden with autumn foliage",
     source: {
       provider: "Pexels",
       photographer: "Olena Bohovyk",
@@ -76,9 +71,8 @@ export const media = {
   },
   "season-winter": {
     section: "seasonal-experience",
-    src: "/garitas-temp/seasons/winter-temp-01.jpg",
-    alt: "Temporary stock photograph of a snow-covered residential yard",
-    temporary: true,
+    src: "/images/seasons/winter.webp",
+    alt: "Stock photograph of a snow-covered residential yard",
     source: {
       provider: "Pexels",
       photographer: "Joshua Miranda",
@@ -87,9 +81,8 @@ export const media = {
   },
   "services-lawn-care": {
     section: "services",
-    src: "/garitas-temp/services/services-temp-01.jpg",
-    alt: "Temporary stock photograph of lawn mowing at a residential property",
-    temporary: true,
+    src: "/images/services/lawn-care.webp",
+    alt: "Stock photograph of lawn mowing at a residential property",
     source: {
       provider: "Pexels",
       photographer: "PROSPER MBEMBA KOUTIHOU",
@@ -98,9 +91,8 @@ export const media = {
   },
   "services-garden-care": {
     section: "services",
-    src: "/garitas-temp/services/services-temp-02.jpg",
-    alt: "Temporary stock photograph of garden trimming and plant care",
-    temporary: true,
+    src: "/images/services/garden-care.webp",
+    alt: "Stock photograph of garden trimming and plant care",
     source: {
       provider: "Pexels",
       photographer: "Anna Shvets",
@@ -109,9 +101,8 @@ export const media = {
   },
   "about-pair": {
     section: "about",
-    src: "/garitas-temp/about/about-temp-01.jpg",
-    alt: "Temporary stock photograph of two professionals outdoors; not Alex or Raimundo",
-    temporary: true,
+    src: "/images/about/about.webp",
+    alt: "Stock photograph of two professionals outdoors; not Alex or Raimundo",
     source: {
       provider: "Pexels",
       photographer: "Ketut Subiyanto",
@@ -120,9 +111,8 @@ export const media = {
   },
   "team-crew": {
     section: "team",
-    src: "/garitas-temp/team/team-temp-01.jpg",
-    alt: "Temporary stock photograph of a maintenance crew working outdoors; not the Garitas team",
-    temporary: true,
+    src: "/images/team/team.webp",
+    alt: "Stock photograph of a maintenance crew working outdoors; not the Garitas team",
     source: {
       provider: "Pexels",
       photographer: "Sóc Năng Động",
@@ -131,9 +121,8 @@ export const media = {
   },
   "work-lawn": {
     section: "real-work",
-    src: "/garitas-temp/work/work-temp-01.jpg",
-    alt: "Temporary stock photograph of lawn care work; not Garitas work",
-    temporary: true,
+    src: "/images/work/lawn-care.webp",
+    alt: "Stock photograph of lawn care work; not Garitas work",
     source: {
       provider: "Pexels",
       photographer: "Magic K",
@@ -142,9 +131,8 @@ export const media = {
   },
   "work-garden": {
     section: "real-work",
-    src: "/garitas-temp/work/work-temp-02.jpg",
-    alt: "Temporary stock photograph of garden maintenance; not Garitas work",
-    temporary: true,
+    src: "/images/work/garden-care.webp",
+    alt: "Stock photograph of garden maintenance; not Garitas work",
     source: {
       provider: "Pexels",
       photographer: "Anna Shvets",
@@ -153,9 +141,8 @@ export const media = {
   },
   "commercial-property": {
     section: "commercial",
-    src: "/garitas-temp/commercial/commercial-temp-01.jpg",
-    alt: "Temporary stock photograph of a landscaped commercial building exterior",
-    temporary: true,
+    src: "/images/commercial/commercial-property.webp",
+    alt: "Stock photograph of a landscaped commercial building exterior",
     source: {
       provider: "Pexels",
       photographer: "Czapp Árpád",
@@ -164,9 +151,8 @@ export const media = {
   },
   "snow-removal": {
     section: "snow",
-    src: "/garitas-temp/snow/snow-temp-01.jpg",
-    alt: "Temporary stock photograph of snow-removal work; not Garitas work",
-    temporary: true,
+    src: "/images/snow/snow-removal.webp",
+    alt: "Stock photograph of snow-removal work; not Garitas work",
     source: {
       provider: "Pexels",
       photographer: "www.kaboompics.com",
@@ -175,7 +161,7 @@ export const media = {
   },
 } satisfies Record<string, MediaAsset>;
 
-export const prototypeVisuals = {
+export const visuals = {
   hero: "hero-primary",
   seasons: {
     spring: "season-spring",

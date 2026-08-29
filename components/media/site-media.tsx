@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { MediaAsset } from "@/content/media";
 import { cn } from "@/lib/utils";
 
-interface PrototypeMediaProps {
+interface SiteMediaProps {
   asset: MediaAsset;
   sizes: string;
   aspectClassName: string;
@@ -14,7 +14,7 @@ interface PrototypeMediaProps {
   children?: ReactNode;
 }
 
-export const PrototypeMedia = ({
+export const SiteMedia = ({
   asset,
   sizes,
   aspectClassName,
@@ -22,7 +22,7 @@ export const PrototypeMedia = ({
   className,
   imageClassName,
   children,
-}: PrototypeMediaProps) => {
+}: SiteMediaProps) => {
   return (
     <div
       className={cn(
@@ -40,11 +40,6 @@ export const PrototypeMedia = ({
         className={cn("object-cover", imageClassName)}
       />
       {children}
-      {asset.temporary ? (
-        <span className="absolute right-3 top-3 z-20 rounded-full border border-white/20 bg-black/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-          Prototype stock
-        </span>
-      ) : null}
     </div>
   );
 };

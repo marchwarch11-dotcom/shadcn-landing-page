@@ -1,8 +1,8 @@
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
 import { commercialContent } from "@/content/commercial";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 
 export const CommercialSection = () => {
   if (!commercialContent) {
@@ -11,7 +11,7 @@ export const CommercialSection = () => {
 
   const commercialMedia = commercialContent.mediaKey
     ? media[commercialContent.mediaKey as keyof typeof media]
-    : media[prototypeVisuals.commercial];
+    : media[visuals.commercial];
 
   return (
     <section id="commercial" className="container py-20 sm:py-24 lg:py-32">
@@ -24,7 +24,7 @@ export const CommercialSection = () => {
               description={commercialContent.description}
             />
           </div>
-          <PrototypeMedia
+          <SiteMedia
             asset={commercialMedia}
             sizes="(max-width: 1024px) 100vw, 50vw"
             aspectClassName="aspect-[4/3] lg:min-h-[30rem] lg:aspect-auto"

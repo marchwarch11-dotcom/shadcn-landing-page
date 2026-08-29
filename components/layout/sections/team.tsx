@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 import { teamMembers, teamSection } from "@/content/team";
 
 export const TeamSection = () => {
@@ -25,8 +25,8 @@ export const TeamSection = () => {
 
       {teamMembers.length === 0 ? (
         <Reveal>
-          <PrototypeMedia
-            asset={media[prototypeVisuals.team]}
+          <SiteMedia
+            asset={media[visuals.team]}
             sizes="100vw"
             aspectClassName="aspect-[4/3] sm:aspect-[16/8]"
             className="rounded-[2rem]"
