@@ -1,0 +1,187 @@
+name: Migrate production image assets
+
+on:
+  push:
+    branches:
+      - garitas-assets-production-migration
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install image tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp imagemagick
+
+      - name: Convert and migrate existing images
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p public/images/{hero,seasons,services,about,team,work,commercial,snow}
+
+          convert_asset() {
+            local src="$1"
+            local dest="$2"
+            test -s "$src"
+            cwebp -quiet -q 88 -m 6 -metadata icc "$src" -o "$dest"
+            test -s "$dest"
+          }
+
+          convert_asset public/garitas-temp/hero/hero-temp-01.jpg public/images/hero/hero.webp
+          convert_asset public/garitas-temp/seasons/spring-temp-01.jpg public/images/seasons/spring.webp
+          convert_asset public/garitas-temp/seasons/summer-temp-01.jpg public/images/seasons/summer.webp
+          convert_asset public/garitas-temp/seasons/fall-temp-01.jpg public/images/seasons/fall.webp
+          convert_asset public/garitas-temp/seasons/winter-temp-01.jpg public/images/seasons/winter.webp
+          convert_asset public/garitas-temp/services/services-temp-01.jpg public/images/services/lawn-care.webp
+          convert_asset public/garitas-temp/services/services-temp-02.jpg public/images/services/garden-care.webp
+          convert_asset public/garitas-temp/about/about-temp-01.jpg public/images/about/about.webp
+          convert_asset public/garitas-temp/team/team-temp-01.jpg public/images/team/team.webp
+          convert_asset public/garitas-temp/work/work-temp-01.jpg public/images/work/lawn-care.webp
+          convert_asset public/garitas-temp/work/work-temp-02.jpg public/images/work/garden-care.webp
+          convert_asset public/garitas-temp/commercial/commercial-temp-01.jpg public/images/commercial/commercial-property.webp
+          convert_asset public/garitas-temp/snow/snow-temp-01.jpg public/images/snow/snow-removal.webp
+
+          rm -rf public/garitas-temp
+
+      - name: Verify dimensions and generate inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs
+
+          image_row() {
+            local file="$1"
+            local section="$2"
+            local dims
+            dims=$(identify -format '%w × %h' "$file")
+            local name
+            name=$(basename "$file")
+            printf '| `%s` | `/%s` | %s | WebP | %s | Converted from JPEG and optimized at quality 88 |\n' "$name" "$file" "$section" "$dims"
+          }
+
+          {
+            echo '# Image asset inventory'
+            echo
+            echo 'Production image paths used by the landing page. Source photography provenance remains in `content/media.ts`.'
+            echo
+            echo '| File | Public path | Landing section | Format | Dimensions | Migration |'
+            echo '| --- | --- | --- | --- | --- | --- |'
+            image_row public/images/hero/hero.webp 'Hero'
+            image_row public/images/seasons/spring.webp 'Seasonal Experience — Spring'
+            image_row public/images/seasons/summer.webp 'Seasonal Experience — Summer'
+            image_row public/images/seasons/fall.webp 'Seasonal Experience — Fall'
+            image_row public/images/seasons/winter.webp 'Seasonal Experience — Winter'
+            image_row public/images/services/lawn-care.webp 'Property Care / Services'
+            image_row public/images/services/garden-care.webp 'Property Care / Services'
+            image_row public/images/about/about.webp 'About Us'
+            image_row public/images/team/team.webp 'The Team'
+            image_row public/images/work/lawn-care.webp 'Real Work / Proof'
+            image_row public/images/work/garden-care.webp 'Real Work / Proof'
+            image_row public/images/commercial/commercial-property.webp 'Commercial / Priority'
+            image_row public/images/snow/snow-removal.webp 'Snow'
+            echo
+            echo '## Final folder tree'
+            echo
+            echo '```text'
+            echo 'public/'
+            echo '└── images/'
+            echo '    ├── about/'
+            echo '    │   └── about.webp'
+            echo '    ├── commercial/'
+            echo '    │   └── commercial-property.webp'
+            echo '    ├── hero/'
+            echo '    │   └── hero.webp'
+            echo '    ├── seasons/'
+            echo '    │   ├── fall.webp'
+            echo '    │   ├── spring.webp'
+            echo '    │   ├── summer.webp'
+            echo '    │   └── winter.webp'
+            echo '    ├── services/'
+            echo '    │   ├── garden-care.webp'
+            echo '    │   └── lawn-care.webp'
+            echo '    ├── snow/'
+            echo '    │   └── snow-removal.webp'
+            echo '    ├── team/'
+            echo '    │   └── team.webp'
+            echo '    └── work/'
+            echo '        ├── garden-care.webp'
+            echo '        └── lawn-care.webp'
+            echo '```'
+            echo
+            echo '## Migration map'
+            echo
+            echo '| Before | After |'
+            echo '| --- | --- |'
+            echo '| `public/garitas-temp/hero/hero-temp-01.jpg` | `public/images/hero/hero.webp` |'
+            echo '| `public/garitas-temp/seasons/spring-temp-01.jpg` | `public/images/seasons/spring.webp` |'
+            echo '| `public/garitas-temp/seasons/summer-temp-01.jpg` | `public/images/seasons/summer.webp` |'
+            echo '| `public/garitas-temp/seasons/fall-temp-01.jpg` | `public/images/seasons/fall.webp` |'
+            echo '| `public/garitas-temp/seasons/winter-temp-01.jpg` | `public/images/seasons/winter.webp` |'
+            echo '| `public/garitas-temp/services/services-temp-01.jpg` | `public/images/services/lawn-care.webp` |'
+            echo '| `public/garitas-temp/services/services-temp-02.jpg` | `public/images/services/garden-care.webp` |'
+            echo '| `public/garitas-temp/about/about-temp-01.jpg` | `public/images/about/about.webp` |'
+            echo '| `public/garitas-temp/team/team-temp-01.jpg` | `public/images/team/team.webp` |'
+            echo '| `public/garitas-temp/work/work-temp-01.jpg` | `public/images/work/lawn-care.webp` |'
+            echo '| `public/garitas-temp/work/work-temp-02.jpg` | `public/images/work/garden-care.webp` |'
+            echo '| `public/garitas-temp/commercial/commercial-temp-01.jpg` | `public/images/commercial/commercial-property.webp` |'
+            echo '| `public/garitas-temp/snow/snow-temp-01.jpg` | `public/images/snow/snow-removal.webp` |'
+          } > docs/image-assets.md
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Verify asset references
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e public/garitas-temp
+          test ! -e components/media/prototype-media.tsx
+          ! grep -R -n -E 'garitas-temp|prototypeVisuals|PrototypeMedia|prototype-media|Prototype stock' \
+            content components app config lib --exclude-dir=node_modules
+
+          for asset in \
+            public/images/hero/hero.webp \
+            public/images/seasons/spring.webp \
+            public/images/seasons/summer.webp \
+            public/images/seasons/fall.webp \
+            public/images/seasons/winter.webp \
+            public/images/services/lawn-care.webp \
+            public/images/services/garden-care.webp \
+            public/images/about/about.webp \
+            public/images/team/team.webp \
+            public/images/work/lawn-care.webp \
+            public/images/work/garden-care.webp \
+            public/images/commercial/commercial-property.webp \
+            public/images/snow/snow-removal.webp; do
+            test -s "$asset"
+            identify "$asset" >/dev/null
+          done
+
+      - name: Install exact project dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit completed migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/migrate-image-assets.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "assets: finalize production image migration"
+          git push

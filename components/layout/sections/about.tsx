@@ -1,8 +1,8 @@
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
 import { aboutContent } from "@/content/about";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 
 export const AboutSection = () => {
   if (!aboutContent) {
@@ -11,13 +11,13 @@ export const AboutSection = () => {
 
   const aboutMedia = aboutContent.mediaKey
     ? media[aboutContent.mediaKey as keyof typeof media]
-    : media[prototypeVisuals.about];
+    : media[visuals.about];
 
   return (
     <section id="about" className="container py-20 sm:py-24 lg:py-32">
       <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <Reveal>
-          <PrototypeMedia
+          <SiteMedia
             asset={aboutMedia}
             sizes="(max-width: 1024px) 100vw, 58vw"
             aspectClassName="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]"

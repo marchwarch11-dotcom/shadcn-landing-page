@@ -1,7 +1,7 @@
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 import { services, servicesSection } from "@/content/services";
 
 export const ServicesSection = () => {
@@ -9,7 +9,7 @@ export const ServicesSection = () => {
     return null;
   }
 
-  const serviceMedia = prototypeVisuals.services.map((key) => media[key]);
+  const serviceMedia = visuals.services.map((key) => media[key]);
 
   return (
     <section id="services" className="container py-20 sm:py-24 lg:py-32">
@@ -29,7 +29,7 @@ export const ServicesSection = () => {
           <Reveal>
             <div className="grid gap-4 sm:grid-cols-2">
               {serviceMedia.map((asset, index) => (
-                <PrototypeMedia
+                <SiteMedia
                   key={asset.src}
                   asset={asset}
                   sizes="(max-width: 640px) 100vw, 50vw"

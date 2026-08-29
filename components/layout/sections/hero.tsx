@@ -1,9 +1,9 @@
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { heroContent } from "@/content/hero";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 
 export const HeroSection = () => {
   if (!heroContent) {
@@ -12,12 +12,12 @@ export const HeroSection = () => {
 
   const heroMedia = heroContent.mediaKey
     ? media[heroContent.mediaKey as keyof typeof media]
-    : media[prototypeVisuals.hero];
+    : media[visuals.hero];
 
   return (
     <section id="hero" className="container pb-16 pt-5 sm:pb-20 sm:pt-8 lg:pb-28">
       <Reveal>
-        <PrototypeMedia
+        <SiteMedia
           asset={heroMedia}
           sizes="(max-width: 768px) 100vw, 1280px"
           aspectClassName="min-h-[36rem] sm:min-h-[40rem] lg:min-h-[44rem]"
@@ -55,7 +55,7 @@ export const HeroSection = () => {
               </div>
             ) : null}
           </div>
-        </PrototypeMedia>
+        </SiteMedia>
       </Reveal>
     </section>
   );

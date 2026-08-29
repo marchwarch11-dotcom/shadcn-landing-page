@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 import { realWorkContent } from "@/content/real-work";
 
 export const RealWorkSection = () => {
@@ -24,9 +24,9 @@ export const RealWorkSection = () => {
 
       {realWorkContent.items.length === 0 ? (
         <div className="grid gap-4 md:grid-cols-2">
-          {prototypeVisuals.realWork.map((key, index) => (
+          {visuals.realWork.map((key, index) => (
             <Reveal key={key} delay={index * 90}>
-              <PrototypeMedia
+              <SiteMedia
                 asset={media[key]}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 aspectClassName={index === 0 ? "aspect-[4/5] md:aspect-[4/3]" : "aspect-[4/3] md:mt-20"}

@@ -1,5 +1,5 @@
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
 import { media } from "@/content/media";
 import { seasonalExperienceContent } from "@/content/seasonal-experience";
@@ -44,7 +44,7 @@ export const SeasonalExperienceSection = () => {
                 )}
               >
                 {seasonMedia ? (
-                  <PrototypeMedia
+                  <SiteMedia
                     asset={seasonMedia}
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                     aspectClassName="aspect-[4/5] sm:aspect-[4/3] xl:aspect-[3/4]"

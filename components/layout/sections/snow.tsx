@@ -1,9 +1,9 @@
 import { Snowflake } from "lucide-react";
 
 import { SectionHeading } from "@/components/layout/section-heading";
-import { PrototypeMedia } from "@/components/media/prototype-media";
+import { SiteMedia } from "@/components/media/site-media";
 import { Reveal } from "@/components/motion/reveal";
-import { media, prototypeVisuals } from "@/content/media";
+import { media, visuals } from "@/content/media";
 import { snowContent } from "@/content/snow";
 
 export const SnowSection = () => {
@@ -13,13 +13,13 @@ export const SnowSection = () => {
 
   const snowMedia = snowContent.mediaKey
     ? media[snowContent.mediaKey as keyof typeof media]
-    : media[prototypeVisuals.snow];
+    : media[visuals.snow];
 
   return (
     <section id="snow" className="container py-20 sm:py-24 lg:py-32">
       <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         <Reveal>
-          <PrototypeMedia
+          <SiteMedia
             asset={snowMedia}
             sizes="(max-width: 1024px) 100vw, 48vw"
             aspectClassName="aspect-[4/5] sm:aspect-[4/3]"
