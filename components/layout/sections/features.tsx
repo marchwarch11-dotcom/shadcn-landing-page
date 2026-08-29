@@ -1,91 +1,64 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Icon } from "@/components/ui/icon";
-import { icons } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-interface FeaturesProps {
-  icon: string;
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export interface FeatureItem {
   title: string;
   description: string;
+  icon?: LucideIcon;
 }
 
-const featureList: FeaturesProps[] = [
-  {
-    icon: "TabletSmartphone",
-    title: "Mobile Friendly",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, consectetur.",
-  },
-  {
-    icon: "BadgeCheck",
-    title: "Social Proof",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Natus consectetur, odio ea accusamus aperiam.",
-  },
-  {
-    icon: "Goal",
-    title: "Targeted Content",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. odio ea accusamus aperiam.",
-  },
-  {
-    icon: "PictureInPicture",
-    title: "Strong Visuals",
-    description:
-      "Lorem elit. A odio velit cum aliquam. Natus consectetur dolores, odio ea accusamus aperiam.",
-  },
-  {
-    icon: "MousePointerClick",
-    title: "Clear CTA",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing. odio ea accusamus consectetur.",
-  },
-  {
-    icon: "Newspaper",
-    title: "Clear Headline",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur.",
-  },
-];
+interface FeaturesSectionProps {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  items: FeatureItem[];
+}
 
-export const FeaturesSection = () => {
+export const FeaturesSection = ({
+  id = "features",
+  eyebrow,
+  title,
+  description,
+  items,
+}: FeaturesSectionProps) => {
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
-    <section id="features" className="container py-24 sm:py-32">
-      <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-        Features
-      </h2>
+    <section id={id} className="container py-20 sm:py-24 lg:py-32">
+      <div className="mx-auto mb-10 max-w-3xl text-center">
+        {eyebrow ? (
+          <p className="mb-2 text-lg tracking-wider text-primary">{eyebrow}</p>
+        ) : null}
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">{title}</h2>
+        {description ? (
+          <p className="text-lg text-muted-foreground sm:text-xl">{description}</p>
+        ) : null}
+      </div>
 
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        What Makes Us Different
-      </h2>
-
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem
-        fugiat, odit similique quasi sint reiciendis quidem iure veritatis optio
-        facere tenetur.
-      </h3>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {featureList.map(({ icon, title, description }) => (
-          <div key={title}>
-            <Card className="h-full bg-background border-0 shadow-none">
-              <CardHeader className="flex justify-center items-center">
-                <div className="bg-primary/20 p-2 rounded-full ring-8 ring-primary/10 mb-4">
-                  <Icon
-                    name={icon as keyof typeof icons}
-                    size={24}
-                    color="hsl(var(--primary))"
-                    className="text-primary"
-                  />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map(({ icon: Icon, title: itemTitle, description: itemDescription }) => (
+          <Card key={itemTitle} className="h-full border-0 bg-background shadow-none">
+            <CardHeader className="items-center text-center">
+              {Icon ? (
+                <div className="mb-4 rounded-full bg-primary/20 p-2 ring-8 ring-primary/10">
+                  <Icon className="size-6 text-primary" aria-hidden="true" />
                 </div>
-
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-muted-foreground text-center">
-                {description}
-              </CardContent>
-            </Card>
-          </div>
+              ) : null}
+              <CardTitle>{itemTitle}</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center text-muted-foreground">
+              {itemDescription}
+            </CardContent>
+          </Card>
         ))}
       </div>
     </section>

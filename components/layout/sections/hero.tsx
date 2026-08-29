@@ -1,77 +1,62 @@
-"use client";
-import { Badge } from "@/components/ui/badge";
+import { SectionHeading } from "@/components/layout/section-heading";
+import { PrototypeMedia } from "@/components/media/prototype-media";
+import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
+import { heroContent } from "@/content/hero";
+import { media, prototypeVisuals } from "@/content/media";
 
 export const HeroSection = () => {
-  const { theme } = useTheme();
+  if (!heroContent) {
+    return null;
+  }
+
+  const heroMedia = heroContent.mediaKey
+    ? media[heroContent.mediaKey as keyof typeof media]
+    : media[prototypeVisuals.hero];
+
   return (
-    <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
-        <div className="text-center space-y-8">
-          <Badge variant="outline" className="text-sm py-2">
-            <span className="mr-2 text-primary">
-              <Badge>New</Badge>
-            </span>
-            <span> Design is out now! </span>
-          </Badge>
+    <section id="hero" className="container pb-16 pt-5 sm:pb-20 sm:pt-8 lg:pb-28">
+      <Reveal>
+        <PrototypeMedia
+          asset={heroMedia}
+          sizes="(max-width: 768px) 100vw, 1280px"
+          aspectClassName="min-h-[36rem] sm:min-h-[40rem] lg:min-h-[44rem]"
+          className="rounded-[2rem] border border-black/10 shadow-[0_35px_100px_-55px_rgba(10,35,22,0.8)]"
+          imageClassName="scale-[1.01]"
+          priority
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/5" />
+          <div className="absolute inset-x-0 bottom-0 z-10 p-6 text-white sm:p-10 lg:p-14">
+            <SectionHeading
+              eyebrow={heroContent.eyebrow}
+              title={heroContent.title}
+              description={heroContent.description}
+              className="max-w-4xl [&_h2]:text-4xl [&_h2]:font-semibold [&_h2]:text-white sm:[&_h2]:text-6xl lg:[&_h2]:text-7xl [&_p]:text-white/75"
+            />
 
-          <div className="max-w-screen-md mx-auto text-center text-4xl md:text-6xl font-bold">
-            <h1>
-              Experience the
-              <span className="text-transparent px-2 bg-gradient-to-r from-[#D247BF] to-primary bg-clip-text">
-                Shadcn
-              </span>
-              landing page
-            </h1>
+            {heroContent.actions.length > 0 ? (
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                {heroContent.actions.map((action, index) => (
+                  <Button
+                    key={`${action.label}-${action.href}`}
+                    asChild
+                    variant={index === 0 ? "secondary" : "outline"}
+                    className="rounded-full"
+                  >
+                    <a
+                      href={action.href}
+                      target={action.external ? "_blank" : undefined}
+                      rel={action.external ? "noreferrer" : undefined}
+                    >
+                      {action.label}
+                    </a>
+                  </Button>
+                ))}
+              </div>
+            ) : null}
           </div>
-
-          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground">
-            {`We're more than just a tool, we're a community of passionate
-            creators. Get access to exclusive resources, tutorials, and support.`}
-          </p>
-
-          <div className="space-y-4 md:space-y-0 md:space-x-4">
-            <Button className="w-5/6 md:w-1/4 font-bold group/arrow">
-              Get Started
-              <ArrowRight className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
-            </Button>
-
-            <Button
-              asChild
-              variant="secondary"
-              className="w-5/6 md:w-1/4 font-bold"
-            >
-              <Link
-                href="https://github.com/nobruf/shadcn-landing-page.git"
-                target="_blank"
-              >
-                Github respository
-              </Link>
-            </Button>
-          </div>
-        </div>
-
-        <div className="relative group mt-14">
-          <div className="absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 bg-primary/50 rounded-full blur-3xl"></div>
-          <Image
-            width={1200}
-            height={1200}
-            className="w-full md:w-[1200px] mx-auto rounded-lg relative rouded-lg leading-none flex items-center border border-t-2 border-secondary  border-t-primary/30"
-            src={
-              theme === "light"
-                ? "/hero-image-light.jpeg"
-                : "/hero-image-dark.jpeg"
-            }
-            alt="dashboard"
-          />
-
-          <div className="absolute bottom-0 left-0 w-full h-20 md:h-28 bg-gradient-to-b from-background/0 via-background/50 to-background rounded-lg"></div>
-        </div>
-      </div>
+        </PrototypeMedia>
+      </Reveal>
     </section>
   );
 };

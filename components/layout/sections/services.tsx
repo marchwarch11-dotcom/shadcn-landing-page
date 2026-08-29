@@ -1,80 +1,61 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-enum ProService {
-  YES = 1,
-  NO = 0,
-}
-interface ServiceProps {
-  title: string;
-  pro: ProService;
-  description: string;
-}
-const serviceList: ServiceProps[] = [
-  {
-    title: "Custom Domain Integration",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit adipisicing.",
-    pro: 0,
-  },
-  {
-    title: "Social Media Integrations",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, dicta.",
-    pro: 0,
-  },
-  {
-    title: "Email Marketing Integrations",
-    description: "Lorem dolor sit amet adipisicing.",
-    pro: 0,
-  },
-  {
-    title: "SEO Optimization",
-    description: "Lorem ipsum dolor sit amet consectetur.",
-    pro: 1,
-  },
-];
+import { SectionHeading } from "@/components/layout/section-heading";
+import { PrototypeMedia } from "@/components/media/prototype-media";
+import { Reveal } from "@/components/motion/reveal";
+import { media, prototypeVisuals } from "@/content/media";
+import { services, servicesSection } from "@/content/services";
 
 export const ServicesSection = () => {
+  if (!servicesSection || services.length === 0) {
+    return null;
+  }
+
+  const serviceMedia = prototypeVisuals.services.map((key) => media[key]);
+
   return (
-    <section id="services" className="container py-24 sm:py-32">
-      <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-        Services
-      </h2>
+    <section id="services" className="container py-20 sm:py-24 lg:py-32">
+      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div>
+          <Reveal>
+            <SectionHeading
+              eyebrow={servicesSection.eyebrow}
+              title={servicesSection.title}
+              description={servicesSection.description}
+              className="lg:sticky lg:top-32"
+            />
+          </Reveal>
+        </div>
 
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        Grow Your Business
-      </h2>
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">
-        From marketing and sales to operations and strategy, we have the
-        expertise to help you achieve your goals.
-      </h3>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div className="space-y-10">
+          <Reveal>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {serviceMedia.map((asset, index) => (
+                <PrototypeMedia
+                  key={asset.src}
+                  asset={asset}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  aspectClassName={index === 0 ? "aspect-[4/5]" : "aspect-[4/3] sm:mt-14"}
+                  className="rounded-[1.5rem]"
+                />
+              ))}
+            </div>
+          </Reveal>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 w-full lg:w-[60%] mx-auto">
-        {serviceList.map(({ title, description, pro }) => (
-          <Card
-            key={title}
-            className="bg-muted/60 dark:bg-card h-full relative"
-          >
-            <CardHeader>
-              <CardTitle>{title}</CardTitle>
-              <CardDescription>{description}</CardDescription>
-            </CardHeader>
-            <Badge
-              data-pro={ProService.YES === pro}
-              variant="secondary"
-              className="absolute -top-2 -right-3 data-[pro=false]:hidden"
-            >
-              PRO
-            </Badge>
-          </Card>
-        ))}
+          <div className="divide-y border-y">
+            {services.map((service, index) => (
+              <Reveal key={service.title} delay={Math.min(index * 35, 210)}>
+                <div className="grid gap-3 py-5 sm:grid-cols-[1fr_1.25fr_auto] sm:items-start sm:gap-6 sm:py-6">
+                  <h3 className="text-xl font-medium tracking-tight sm:text-2xl">{service.title}</h3>
+                  <p className="text-sm leading-6 text-muted-foreground sm:text-base">
+                    {service.description}
+                  </p>
+                  <span className="text-xs font-medium tabular-nums text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
