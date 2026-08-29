@@ -1,0 +1,63 @@
+name: Validate final image assets
+
+on:
+  push:
+    branches:
+      - garitas-assets-production-migration
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Verify final asset architecture
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e public/garitas-temp
+          test ! -e components/media/prototype-media.tsx
+          if grep -RniE 'prototype|garitas-temp' content components app config lib --exclude-dir=node_modules; then
+            echo 'Found active prototype reference' >&2
+            exit 1
+          fi
+          assets=(
+            public/images/hero/hero.webp
+            public/images/seasons/spring.webp
+            public/images/seasons/summer.webp
+            public/images/seasons/fall.webp
+            public/images/seasons/winter.webp
+            public/images/services/lawn-care.webp
+            public/images/services/garden-care.webp
+            public/images/about/about.webp
+            public/images/team/team.webp
+            public/images/work/lawn-care.webp
+            public/images/work/garden-care.webp
+            public/images/commercial/commercial-property.webp
+            public/images/snow/snow-removal.webp
+          )
+          test "${#assets[@]}" -eq 13
+          for asset in "${assets[@]}"; do test -s "$asset"; done
+      - name: Install exact dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Remove temporary validation workflow
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/validate-assets-final.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/validate-assets-final.yml
+          git commit -m "chore: remove final asset validation workflow"
+          git push
